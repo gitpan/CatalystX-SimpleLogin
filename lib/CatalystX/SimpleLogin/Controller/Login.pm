@@ -13,6 +13,8 @@ with qw(
     Catalyst::Component::ContextClosure
 );
 
+has '+_trait_merge' => (default => 1);
+
 __PACKAGE__->config(
     traits => 'Logout',
 );
@@ -21,40 +23,6 @@ sub BUILD {
     my $self = shift;
     $self->login_form; # Build login form at construction time
 }
-
-has 'username_field' => (
-    is => 'ro',
-    isa => NonEmptySimpleStr,
-    required => 1,
-    default => 'username',
-);
-
-has 'password_field' => (
-    is => 'ro',
-    isa => NonEmptySimpleStr,
-    required => 1,
-    default => 'password',
-);
-
-has 'remember_field' => (
-    is => 'ro',
-    isa => NonEmptySimpleStr,
-    required => 1,
-    default => 'remember',
-);
-
-has 'login_error_message' => (
-    is => 'ro',
-    isa => NonEmptySimpleStr,
-    required => 1,
-    default => 'Wrong username or password',
-);
-
-has 'extra_auth_fields' => (
-    isa => ArrayRef[NonEmptySimpleStr],
-    is => 'ro',
-    default => sub { [] },
-);
 
 has login_form_class => (
     isa => ClassName,
@@ -95,11 +63,11 @@ has render_login_form_stash_key => (
 with 'MooseX::RelatedClassRoles' => { name => 'login_form' };
 
 sub _build_login_form {
-	my $self = shift;
-	$self->apply_login_form_class_roles($self->login_form_class_roles->flatten)
+    my $self = shift;
+    $self->apply_login_form_class_roles($self->login_form_class_roles->flatten)
         if scalar $self->login_form_class_roles->flatten; # FIXME - Should MX::RelatedClassRoles
                                                           #         do this automagically?
-	return $self->login_form_class->new( $self->login_form_args );
+    return $self->login_form_class->new( $self->login_form_args );
 }
 
 sub render_login_form {
@@ -111,11 +79,16 @@ sub login
     :Chained('/')
     :PathPart('login')
     :Args(0)
-    :ActionClass('REST')
 {
     my ($self, $ctx) = @_;
-
     my $form = $self->login_form;
+    my $p = $ctx->req->parameters;
+   
+    if( $form->process(ctx => $ctx, params => $p) ){
+        $ctx->res->redirect($self->redirect_after_login_uri($ctx));
+        $ctx->extend_session_expires(999999999999)
+            if $form->field( 'remember' )->value;
+    }
 
     $ctx->stash(
         $self->login_form_stash_key        => $form,
@@ -124,29 +97,6 @@ sub login
             $self->render_login_form($ctx, $form);
         }, $ctx),
     );
-}
-
-sub login_GET {}
-
-sub login_POST {
-    my ($self, $ctx) = @_;
-
-    my $form = $self->login_form;
-    my $p = $ctx->req->body_parameters;
-    if ($form->process($p)) {
-        if ($ctx->authenticate({
-            $self->username_field => $form->field('username')->value,
-            $self->password_field => $form->field('password')->value,
-            map { $_ => $form->field($_) } @{ $self->extra_auth_fields },
-        })) {
-            $ctx->extend_session_expires(999999999999)
-                if $form->field( $self->remember_field )->value;
-            $ctx->res->redirect($self->redirect_after_login_uri($ctx));
-        }
-        else{
-            $form->field( $self->password_field )->add_error( $self->login_error_message );
-        }
-    }
 }
 
 sub redirect_after_login_uri {
@@ -176,20 +126,14 @@ CatalystX::SimpleLogin::Controller::Login - Configurable login controller
         },
     );
 
+See L<CatalystX::SimpleLogin::Form::Login> for configuring the form.
+
 =head1 DESCRIPTION
 
 Controller base class which exists to have login roles composed onto it
 for the login and logout actions.
 
 =head1 ATTRIBUTES
-
-=head2 username_field
-
-=head2 password_field
-
-=head2 remember_field
-
-=head2
 
 =head1 METHODS
 

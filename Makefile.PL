@@ -14,12 +14,12 @@ all_from 'lib/CatalystX/SimpleLogin.pm';
 
 requires 'Moose';
 requires 'Catalyst::Runtime' => '5.80013';
-requires 'MooseX::MethodAttributes' => '0.16_02';
+requires 'MooseX::MethodAttributes' => '0.18';
 requires 'Catalyst::Action::REST' => '0.74';
 requires 'Catalyst::Plugin::Authentication';
 requires 'Catalyst::View::TT';
 requires 'CatalystX::InjectComponent';
-requires 'CatalystX::Component::Traits' => '0.10';
+requires 'CatalystX::Component::Traits' => '0.13';
 requires 'Moose::Autobox' => '0.09';
 requires 'MooseX::Types::Common';
 requires 'MooseX::Types';
@@ -27,7 +27,7 @@ requires 'MooseX::RelatedClassRoles' => '0.004';
 requires 'HTML::FormHandler' => '0.26001';
 requires 'namespace::autoclean';
 
-test_requires 'Test::More';
+test_requires 'Test::More' => '0.94';
 test_requires 'Catalyst::Action::RenderView';
 test_requires 'Catalyst::Plugin::Session';
 test_requires 'Catalyst::Plugin::Session::State::Cookie';
