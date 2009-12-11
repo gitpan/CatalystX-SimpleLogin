@@ -20,6 +20,7 @@ lib/CatalystX/SimpleLogin/Form/Login.pm
 lib/CatalystX/SimpleLogin/Form/LoginOpenID.pm
 lib/CatalystX/SimpleLogin/Manual.pod
 lib/CatalystX/SimpleLogin/TraitFor/Controller/Login/Logout.pm
+lib/CatalystX/SimpleLogin/TraitFor/Controller/Login/OpenID.pm
 lib/CatalystX/SimpleLogin/TraitFor/Controller/Login/RenderAsTTTemplate.pm
 lib/CatalystX/SimpleLogin/TraitFor/Controller/Login/WithRedirect.pm
 Makefile.PL
