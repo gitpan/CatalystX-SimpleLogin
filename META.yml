@@ -8,8 +8,10 @@ build_requires:
   Catalyst::Controller::ActionRole: 0.12
   Catalyst::Plugin::Session::State::Cookie: 0
   Catalyst::Plugin::Session::Store::File: 0
+  CatalystX::InjectComponent: 0
   ExtUtils::MakeMaker: 6.42
   HTTP::Request::Common: 0
+  Test::Exception: 0
   Test::More: 0.94
 configure_requires:
   ExtUtils::MakeMaker: 6.42
@@ -29,7 +31,7 @@ provides:
     file: lib/Catalyst/ActionRole/NeedsLogin.pm
   CatalystX::SimpleLogin:
     file: lib/CatalystX/SimpleLogin.pm
-    version: 0.06
+    version: 0.07
   CatalystX::SimpleLogin::Controller::Login:
     file: lib/CatalystX/SimpleLogin/Controller/Login.pm
   CatalystX::SimpleLogin::Form::Login:
@@ -63,4 +65,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: http://github.com/bobtfish/catalystx-simplelogin
-version: 0.06
+version: 0.07

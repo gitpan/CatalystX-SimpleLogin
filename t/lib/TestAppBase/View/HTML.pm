@@ -1,4 +1,4 @@
-package TestApp::View::HTML;
+package TestAppBase::View::HTML;
 use Moose;
 use namespace::autoclean;
 
@@ -10,4 +10,3 @@ __PACKAGE__->config(
 );
 
 1;
-
