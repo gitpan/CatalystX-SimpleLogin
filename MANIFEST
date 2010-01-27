@@ -1,4 +1,5 @@
 .gitignore
+.TODO.swp
 Changes
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm
@@ -44,6 +45,7 @@ t/author/pod.t
 t/lib/Catalyst/Authentication/Credential/MockOpenID.pm
 t/lib/script/testapp_server.pl
 t/lib/TestApp.pm
+t/lib/TestApp/Controller/NeedsAuth.pm
 t/lib/TestApp/root/login/login.tt
 t/lib/TestAppBase.pm
 t/lib/TestAppBase/Controller/Root.pm
