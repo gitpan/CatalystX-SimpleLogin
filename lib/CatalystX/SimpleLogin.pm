@@ -3,7 +3,7 @@ use Moose::Role;
 use CatalystX::InjectComponent;
 use namespace::autoclean;
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 after 'setup_components' => sub {
     my $class = shift;
@@ -42,6 +42,12 @@ CatalystX::SimpleLogin - Provide a simple Login controller which can be reused
    );
 
    __PACKAGE__->setup;
+
+=head1 ATTENTION!
+
+If you're new here, you should start by reading
+L<CatalystX::SimpleLogin::Manual>, which provides a gentler introduction to
+using this code. Come back here when you're done there.
 
 =head1 DESCRIPTION
 
