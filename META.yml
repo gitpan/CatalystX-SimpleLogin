@@ -17,7 +17,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.42
 distribution_type: module
-generated_by: 'Module::Install version 0.91'
+generated_by: 'Module::Install version 0.97'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -27,43 +27,32 @@ no_index:
   directory:
     - inc
     - t
-provides:
-  Catalyst::ActionRole::NeedsLogin:
-    file: lib/Catalyst/ActionRole/NeedsLogin.pm
-  CatalystX::SimpleLogin:
-    file: lib/CatalystX/SimpleLogin.pm
-    version: 0.09
-  CatalystX::SimpleLogin::Controller::Login:
-    file: lib/CatalystX/SimpleLogin/Controller/Login.pm
-  CatalystX::SimpleLogin::Form::Login:
-    file: lib/CatalystX/SimpleLogin/Form/Login.pm
-  CatalystX::SimpleLogin::Form::LoginOpenID:
-    file: lib/CatalystX/SimpleLogin/Form/LoginOpenID.pm
-  CatalystX::SimpleLogin::TraitFor::Controller::Login::Logout:
-    file: lib/CatalystX/SimpleLogin/TraitFor/Controller/Login/Logout.pm
-  CatalystX::SimpleLogin::TraitFor::Controller::Login::OpenID:
-    file: lib/CatalystX/SimpleLogin/TraitFor/Controller/Login/OpenID.pm
-  CatalystX::SimpleLogin::TraitFor::Controller::Login::RenderAsTTTemplate:
-    file: lib/CatalystX/SimpleLogin/TraitFor/Controller/Login/RenderAsTTTemplate.pm
-  CatalystX::SimpleLogin::TraitFor::Controller::Login::WithRedirect:
-    file: lib/CatalystX/SimpleLogin/TraitFor/Controller/Login/WithRedirect.pm
 requires:
   Catalyst::Action::REST: 0.74
+  Catalyst::Action::RenderView: 0
+  Catalyst::ActionRole::ACL: 0
+  Catalyst::Controller::ActionRole: 0.12
   Catalyst::Plugin::Authentication: 0
   Catalyst::Plugin::Session: 0.27
+  Catalyst::Plugin::Session::State::Cookie: 0
+  Catalyst::Plugin::Session::Store::File: 0
   Catalyst::Runtime: 5.80013
   Catalyst::View::TT: 0
   CatalystX::Component::Traits: 0.13
   CatalystX::InjectComponent: 0
   HTML::FormHandler: 0.28001
+  HTTP::Request::Common: 0
   Moose: 0
   Moose::Autobox: 0
   MooseX::MethodAttributes: 0.18
   MooseX::RelatedClassRoles: 0.004
   MooseX::Types: 0
   MooseX::Types::Common: 0
+  SQL::Translator: 0
+  Test::Exception: 0
+  Test::More: 0.94
   namespace::autoclean: 0
 resources:
   license: http://dev.perl.org/licenses/
-  repository: http://github.com/bobtfish/catalystx-simplelogin
-version: 0.09
+  repository: git://github.com/bobtfish/catalystx-simplelogin.git
+version: 0.10
