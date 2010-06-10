@@ -17,7 +17,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.42
 distribution_type: module
-generated_by: 'Module::Install version 0.97'
+generated_by: 'Module::Install version 0.99'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -32,7 +32,7 @@ provides:
     file: lib/Catalyst/ActionRole/NeedsLogin.pm
   CatalystX::SimpleLogin:
     file: lib/CatalystX/SimpleLogin.pm
-    version: 0.11
+    version: 0.12
   CatalystX::SimpleLogin::Controller::Login:
     file: lib/CatalystX/SimpleLogin/Controller/Login.pm
   CatalystX::SimpleLogin::Form::Login:
@@ -75,4 +75,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: git://github.com/bobtfish/catalystx-simplelogin.git
-version: 0.11
+version: 0.12

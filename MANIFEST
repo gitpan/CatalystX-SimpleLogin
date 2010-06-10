@@ -1,4 +1,5 @@
 .gitignore
+0001-Skip-test-when-appropriate.-Fixes-RT-58307.patch
 Changes
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm
