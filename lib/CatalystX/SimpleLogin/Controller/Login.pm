@@ -71,7 +71,7 @@ sub _build_login_form {
     $self->apply_login_form_class_roles($self->login_form_class_roles->flatten)
         if scalar $self->login_form_class_roles->flatten; # FIXME - Should MX::RelatedClassRoles
                                                           #         do this automagically?
-    return $self->login_form_class->new( %{$self->login_form_args} ); # FIXME - Formhandler doesn't like hashref
+    return $self->login_form_class->new($self->login_form_args);
 }
 
 sub render_login_form {
@@ -146,7 +146,10 @@ CatalystX::SimpleLogin::Controller::Login - Configurable login controller
     # full config example
     __PACKAGE__->config(
         'Controller::Login' => {
-            traits => 'WithRedirect', # Optional, enables redirect-back feature
+            traits => [
+                'WithRedirect', # Optional, enables redirect-back feature
+                '-RenderAsTTTemplate', # Optional, allows you to use your own template
+            ],
             actions => {
                 login => { # Also optional
                     PathPart => ['theloginpage'], # Change login action to /theloginpage
