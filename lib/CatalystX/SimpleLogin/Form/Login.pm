@@ -36,10 +36,10 @@ foreach my $type (qw/ username password /) {
     # FIXME - be able to change field names in rendered form also!
 }
 
-has_field 'username' => ( type => 'Text' );
-has_field 'password' => ( type => 'Password' );
-has_field 'remember' => ( type => 'Checkbox' );
-has_field 'submit'   => ( type => 'Submit', value => 'Login' );
+has_field 'username' => ( type => 'Text', tabindex => 1 );
+has_field 'password' => ( type => 'Password', tabindex => 2 );
+has_field 'remember' => ( type => 'Checkbox', tabindex => 3 );
+has_field 'submit'   => ( type => 'Submit', value => 'Login', tabindex => 4 );
 
 sub validate {
     my $self = shift;
@@ -110,7 +110,7 @@ A L<HTML::FormHandler> form for the login form.
 
 =over
 
-=item L<CatalystX::SimpleLogin::ControllerRole::Login>
+=item L<CatalystX::SimpleLogin::Controller::Login>
 
 =back
 
@@ -127,7 +127,7 @@ The keys are 'authenticate_username_field_name' and/or
             login_form_args => {
                authenticate_username_field_name => 'name',
                authenticate_password_field_name => 'password2',
-            }
+            },
         },
     );
 
@@ -151,6 +151,17 @@ Additional fields can be added:
        'foo' => ( type => 'MyField' ),
        'bar' => { type => 'Text' },
    ]
+
+Additional arguments to the authenticate call can be added:
+If your user table has a column C<status> and you want only those with C<status = 'active'>to be able to log .in
+
+    __PACKAGE__->config(
+        'Controller::Login' => {
+            login_form_args => { 
+                authenticate_args => { status => 1 },
+            },
+        },
+    };
 
 =head1 AUTHORS
 

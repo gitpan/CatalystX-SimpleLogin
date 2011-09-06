@@ -67,9 +67,9 @@ COMPONENTS
         modifiers to run before / after the login or logout actions or
         override methods.
 
-    *   CatalystX::SimpleLogin::TraitFor::Controller::Logout - provides the
-        "logout" action and associated methods. You can compose this
-        manually yourself if you want just that action.
+    *   CatalystX::SimpleLogin::TraitFor::Controller::Login::Logout -
+        provides the "logout" action and associated methods. You can compose
+        this manually yourself if you want just that action.
 
         This trait is set by default, but if you set another trait in your
         config, you will have to include it.
@@ -114,7 +114,7 @@ SEE ALSO
 
     *   Moose and Moose::Role
 
-    *   MooseX::MethodAttributes::Role - Actions compsed from Moose::Role.
+    *   MooseX::MethodAttributes::Role - Actions composed from Moose::Role.
 
     *   CatalystX::InjectComponent - Injects the controller class
 
@@ -132,12 +132,13 @@ SEE ALSO
         onto components from config
 
 AUTHORS
-    Tomas Doran (t0m) "<bobtfish@bobtfish.net>"
+    Tomas Doran (t0m) "bobtfish@bobtfish.net"
     Zbigniew Lukasiak
-    Stephan Jauernick (stephan48) "<stephan@stejau.de>"
+    Stephan Jauernick (stephan48) "stephan@stejau.de"
     Gerda Shank (gshank) "gshank@cpan.org"
     Florian Ragwitz "rafl@debian.org"
     Shlomi Fish
+    Oleg Kostyuk (cub-uanic) "cub@cpan.org"
 
 LICENSE
     Copyright 2009 Tomas Doran. Some rights reserved.

@@ -22,13 +22,7 @@ before login_redirect => sub {
     my ($self, $c, $message) = @_;
     $c->flash->{error_msg} = $message; # FIXME - Flash horrible
     $c->session->{redirect_to_after_login}
-        = $c->uri_for(
-            $c->action,
-            $c->req->captures,
-            $c->req->args->flatten,
-            $c->req->parameters,
-            )
-            ->as_string;
+        = $c->req->uri->as_string;
 };
 
 1;
@@ -44,12 +38,24 @@ users who login back to the page they originally requested.
 
     package MyApp::Controller::NeedsAuth;
 
-    sub something : Path Does('NeedsLogin') {
+    use Moose;
+    use namespace::autoclean;
+
+    # One needs to inherit from Catalyst::Controller::ActionRole in order
+    # to get the Does('NeedsLogin') functionality.
+    BEGIN { extends 'Catalyst::Controller::ActionRole'; }
+
+    sub inbox : Path Does('NeedsLogin') {
         # Redirects to /login if not logged in
+        my ($self, $c) = @_;
+
+        $c->stash->{template} = "inbox.tt2";
+
+        return;
     }
 
     # Turn on in config
-    MyApp->config('Contoller::Login' => { traits => 'Login::WithRedirect' });
+    MyApp->config('Contoller::Login' => { traits => 'WithRedirect' });
 
 =head1 DESCRIPTION
 
@@ -75,7 +81,7 @@ C<< $c->session->{redirect_to_after_login} >> to the current URL.
 
 =over
 
-=item L<CatalystX::SimpleLogin::ControllerRole::Login>
+=item L<CatalystX::SimpleLogin::Controller::Login>
 
 =item L<CatalystX::SimpleLogin::Form::Login>
 

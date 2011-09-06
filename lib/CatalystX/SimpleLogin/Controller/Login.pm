@@ -101,8 +101,8 @@ sub login
     my $form = $self->login_form;
     my $p = $ctx->req->parameters;
 
-    if( $form->process(ctx => $ctx, params => $p) ){
-        $ctx->res->redirect($self->redirect_after_login_uri($ctx));
+    if( $form->process(ctx => $ctx, params => $p) ) {
+        $self->do_post_login_redirect($ctx);
         $ctx->extend_session_expires(999999999999)
             if $form->field( 'remember' )->value;
     }
@@ -114,6 +114,11 @@ sub login
             $self->render_login_form($ctx, $form);
         }, $ctx),
     );
+}
+
+sub do_post_login_redirect {
+    my ($self, $ctx) = @_;
+    $ctx->res->redirect($self->redirect_after_login_uri($ctx));
 }
 
 sub login_redirect {
@@ -167,11 +172,52 @@ for the login and logout actions.
 
 =head1 ATTRIBUTES
 
+=head2 login_form_class
+
+A class attribute containing the class of the form to be initialised. One
+can override it in a derived class with the class of a new form, possibly
+subclassing L<CatalystX::SimpleLogin::Form::Login>. For example:
+
+    package MyApp::Controller::Login;
+
+    use Moose;
+
+    extends('CatalystX::SimpleLogin::Controller::Login');
+
+    has '+login_form_class' => (
+        default => "MyApp::Form::Login",
+    );
+
+    1;
+
+=head2 login_form_class_roles
+
+An attribute containing an array reference of roles to be consumed by
+the form. One can override it in a similar way to C<login_form_class>:
+
+    package MyApp::Controller::Login;
+
+    use Moose;
+
+    extends('CatalystX::SimpleLogin::Controller::Login');
+
+    has '+login_form_class_roles' => (
+        default => sub { [qw(MyApp::FormRole::Foo MyApp::FormRole::Bar)] },
+    );
+
+    1;
+
 =head1 METHODS
 
 =head2 BUILD
 
 Cause form instance to be built at application startup.
+
+=head2 do_post_login_redirect
+
+This method does a post-login redirect. B<TODO> for BOBTFISH - should it even
+be public? If it does need to be public, then document it because the Pod
+coverage test failed.
 
 =head2 login
 
@@ -224,7 +270,7 @@ require registration (hence the name).
 
 =over
 
-=item L<CatalystX::SimpleLogin::ControllerRole::Login::WithRedirect>
+=item L<CatalystX::SimpleLogin::TraitFor::Controller::Login::WithRedirect>
 
 =item L<CatalystX::SimpleLogin::Form::Login>
 
