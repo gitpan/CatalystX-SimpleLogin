@@ -1,6 +1,7 @@
 package TestAppBase;
 use Moose;
 use CatalystX::InjectComponent;
+use File::Temp qw/ tempdir /;
 use namespace::autoclean;
 
 use Catalyst qw/
@@ -42,6 +43,9 @@ __PACKAGE__->config(
             },
         },
     },
+    'Plugin::Session' => {
+        storage => tempdir( CLEANUP => 1 ),
+    },
 );
 
 after 'setup_components' => sub {
@@ -55,7 +59,7 @@ after 'setup_components' => sub {
         into => $app,
         component => 'TestAppBase::View::HTML',
         as => 'HTML',
-    ) unless $app->controller('HTML');
+    ) unless $app->view('HTML');
 };
 
 1;

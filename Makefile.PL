@@ -27,6 +27,7 @@ requires 'Catalyst::Plugin::Session' => '0.27'; # Required as we use the 'Plugin
 
 test_requires 'Test::More' => '0.94';
 test_requires 'Test::Exception';
+test_requires 'File::Temp';
 test_requires 'Catalyst::Action::RenderView';
 test_requires 'Catalyst::Plugin::Session::State::Cookie';
 test_requires 'Catalyst::Plugin::Session::Store::File';
@@ -36,7 +37,6 @@ test_requires 'Catalyst::ActionRole::ACL';
 test_requires 'CatalystX::InjectComponent';
 test_requires 'SQL::Translator';
 
-author_requires 'Catalyst::Authentication::Credential::OpenID';
 author_requires 'Test::EOL' => '0.3';
 author_requires 'Test::NoTabs';
 author_requires 'Test::Pod' => '1.14';
