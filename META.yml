@@ -34,7 +34,7 @@ provides:
     file: lib/Catalyst/ActionRole/NeedsLogin.pm
   CatalystX::SimpleLogin:
     file: lib/CatalystX/SimpleLogin.pm
-    version: 0.16
+    version: 0.17
   CatalystX::SimpleLogin::Controller::Login:
     file: lib/CatalystX/SimpleLogin/Controller/Login.pm
   CatalystX::SimpleLogin::Form::Login:
@@ -68,4 +68,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: git://github.com/bobtfish/catalystx-simplelogin.git
-version: 0.16
+version: 0.17
